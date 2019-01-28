@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+  <script src="date.format.js"></script>
+    <link rel="stylesheet" href="Style.css" type=text/css>
+  
+	</head>
+	<body style="background-image: url(https://i.stack.imgur.com/NYIz7.png);background-repeat: no-repeat;background-size: cover;box-sizing: border-box">
+<div class='container' ng-app='todoApp'>
+  <div ng-controller='todoController'>
+    <h2 class='center-align'>Reminder</h2>
+    <form ng-submit='submitTask()'>
+      <div class='input-field'>
+        <input type="text" ng-model='name' placeholder='What needs to be done?' />
+        <input type="date"  ng-model='mydate'>
+      </div>
+    </form>
+    <div ng-show='tasks.length > 0'>
+      <p class='right-align'>You've {{ tasks.length }} task to do</p>
+      <ul class='collection'>
+        <li class='collection-item blue lighten-5' ng-repeat='task in tasks track by $index'>
+          <input type="checkbox" id="task-{{ $index }}" class="filled-in" ng-model='task.isDone' />
+          <label for="task-{{ $index }}" ng-class='{delete: task.isDone}'>{{ task.taskName }}&nbsp;&nbsp;{{task.duedate}}&nbsp;&nbsp;{{task.time}}</label>
+        </li>
+      </ul>
+      <div class="right-align">
+        <button class="waves-effect waves-light btn" ng-click='saveTodo()'>Save the list</button>
+        <button class="waves-effect waves-light btn" ng-click='clearTask()'>Clear completed</button>
+      </div>
+    </div>
+  </div>
+</div>
+      <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+      <script src="script.js"></script>
+    </body>
+</html>
