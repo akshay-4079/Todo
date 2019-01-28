@@ -6,7 +6,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.js"></script>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
@@ -18,10 +18,10 @@
 <div class='container' ng-app='todoApp'>
   <div ng-controller='todoController'>
     <h2 class='center-align'>Reminder</h2>
-    <form ng-submit='submitTask()'>
+    <form id='frm 1' ng-submit='submitTask()'>
       <div class='input-field'>
-        <input type="text" ng-model='name' placeholder='What needs to be done?' />
-        <input type="date"  ng-model='mydate'>
+        <input type="text" ng-model='name' placeholder='What needs to be done?' required>
+        <input id="date" type="date" min="2019-01-01" max="2100-01-01" value="2017-04-01" ng-model='mydate' required >
       </div>
     </form>
     <div ng-show='tasks.length > 0'>
