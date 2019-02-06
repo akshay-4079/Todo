@@ -1,3 +1,15 @@
 .delete {
   text-decoration: line-through;
 }
+li{
+    
+    font-family:'nebulousregular'; 
+}
+h2{
+    
+    font-family:'nebulousregular'; 
+}
+::placeholder
+{font-family:'nebulousregular'; 
+    color: black;
+}

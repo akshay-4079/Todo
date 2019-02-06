@@ -1,49 +1,49 @@
 <!doctype html>
-<html>
+<html ng-app='todoApp'>
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+      <script src="/ui-bootstrap-tpls-2.4.0.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.15.0/lodash.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.js"></script>
   <script src="date.format.js"></script>
     <link rel="stylesheet" href="Style.css" type=text/css>
-  
+  <script src="script.js"></script>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css">
 	</head>
-	<body style="background-image: url(https://i.stack.imgur.com/NYIz7.png);background-repeat: no-repeat;background-size: cover;box-sizing: border-box">
-<div class='container' ng-app='todoApp'>
-  <div ng-controller='todoController'>
-    <h2 class='center-align'>Reminder</h2>
+	<body ng-controller='todoController' style="background-image: url(https://images.unsplash.com/photo-1526376043067-5af36c35cd6c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1039&q=80);background-repeat: no-repeat;background-size: cover;box-sizing: border-box;width: 100%;height: 100%" >
+<div class='container'>
+  <div>
+    <h2 class='center-align'>Reminders</h2>
     <form id='frm 1' ng-submit='submitTask()'>
-      <div class='input-field'>
-        <input type="text" ng-model='name' placeholder='What needs to be done?' required>
-        <input id="date" type="date" min="2019-01-01" max="2100-01-01" value="2017-04-01" ng-model='mydate' required >
-      </div>
+      <div class='input-field' >
+          <span>
+        <input id="date" type="date" min="2019-01-01" max="2100-01-01" value="2017-04-01" ng-model='mydate' required style="width: 15%" >
+              <input type="text" ng-model='name' placeholder='What needs to be done?' required style="width: 60%">
+          </span>
+              </div>
     </form>
+      <ul uib-pagination total-items="tasks.length" ng-model="currentPage" ng-change="pageChanged()"></ul>
     <div ng-show='tasks.length > 0'>
-      <p class='right-align'>You've {{ tasks.length }} task to do</p>
-      <ul class='collection'>
-        <li class='collection-item blue lighten-5' ng-repeat='task in tasks track by $index'>
-          <input type="checkbox" id="task-{{ $index }}" class="filled-in" ng-model='task.isDone' />
-          <label for="task-{{ $index }}" ng-class='{delete: task.isDone}'>{{ task.taskName }}&nbsp;&nbsp;{{task.duedate}}&nbsp;&nbsp;{{task.time}}</label>
-        </li>
-      </ul>
-      <div class="right-align">
+        
+         <p class='right-align'> Tasks Remaining {{ tasks.length }}</p>
+        <div class="right-align">
         <button class="waves-effect waves-light btn" ng-click='saveTodo()'>Save the list</button>
         <button class="waves-effect waves-light btn" ng-click='clearTask()'>Clear completed</button>
       </div>
+     
+      <ul class='collection'>
+        <li  style="font-stretch: expanded;font-variant-caps:all-petite-caps" ng-repeat='task in filteredTodos track by $index'>
+          <input type="checkbox" id="task-{{ $index }}" class="filled-in" ng-model='task.isDone' />
+          <label for="task-{{ $index }}" ng-class='{delete: task.isDone}' style="font-size: 40px;color: black">{{ task.taskName }}&nbsp;&nbsp;{{task.duedate}}</label>
+        </li>
+      </ul>
+     
     </div>
   </div>
 </div>
-      <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
-      <script src="script.js"></script>
     </body>
 </html>

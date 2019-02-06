@@ -1,9 +1,16 @@
 
 
-var todo = angular.module('todoApp', ['ngStorage']);
+var todoApp = angular.module('todoApp', ['ngStorage','ui.bootstrap']);
 
-todo.controller('todoController', ['$scope', '$localStorage', function($scope, $localStorage) {
-  if($localStorage.todoList) {
+todoApp.controller('todoController', ['$scope', '$localStorage', function($scope, $localStorage) {
+  
+   $scope.filteredTodos = []
+  ,$scope.currentPage = 1
+  ,$scope.numPerPage = 10
+  ,$scope.maxSize = 5;
+    
+    
+    if($localStorage.todoList) {
     $scope.tasks = $localStorage.todoList;
   } else {
     $scope.tasks = [];
@@ -25,12 +32,34 @@ todo.controller('todoController', ['$scope', '$localStorage', function($scope, $
       due2:d
     });
     $scope.name = ''; // clear the textbox
-  };
-    
+  };  
   $scope.clearTask = function() {
     var newTaskList = _.remove($scope.tasks, ['isDone', false]);
     $scope.tasks = newTaskList;
+    $scope.$watch('currentPage + numPerPage', function() {
+    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+    , end = begin + $scope.numPerPage;
+    if($scope.tasks.length>$scope.numPerPage){
+    $scope.filteredTodos = $scope.tasks.slice(begin, end);
+    }
+           else
+               {
+                   $scope.filteredTodos=$scope.tasks;
+               }
+  });  
   };
+    
+       $scope.$watch('currentPage + numPerPage', function() {
+    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+    , end = begin + $scope.numPerPage;
+    if($scope.tasks.length>$scope.numPerPage){
+    $scope.filteredTodos = $scope.tasks.slice(begin, end);
+    }
+           else
+               {
+                   $scope.filteredTodos=$scope.tasks;
+               }
+  });
   
   window.onload=function alerts(){
       var countb=0;
