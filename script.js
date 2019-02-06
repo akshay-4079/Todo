@@ -31,7 +31,7 @@ todoApp.controller('todoController', ['$scope', '$localStorage', function($scope
       duedate:c,
       due2:d
     });
-    $scope.name = ''; // clear the textbox
+    $scope.name = ''; 
   };  
   $scope.clearTask = function() {
     var newTaskList = _.remove($scope.tasks, ['isDone', false]);
